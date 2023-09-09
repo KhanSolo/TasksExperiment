@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Derived": {
+      "commandName": "Project",
+      "hotReloadEnabled": false
+    }
+  }
+}
