@@ -10,6 +10,10 @@ internal class Program
 
         //var boxed = FormatterServices.GetUninitializedObject(typeof(void));
         //Console.WriteLine(boxed.GetType().FullName);
+        string d = "";
+
+        d = d + @"\";
+        Console.Write(d);
     }
 }
 
