@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Xunit.Abstractions;
 
 namespace UnitTests;
 
-public sealed class StringTests
+public sealed class StringUnitTests
 {
     private ITestOutputHelper _output;
 
-    public StringTests(ITestOutputHelper output)
-    {
-        _output = output;
-    }
+    public StringUnitTests(ITestOutputHelper output) => _output = output;
 
     [Fact]
     public void TestJoin()
@@ -54,4 +46,5 @@ public sealed class StringTests
         decimal gradePointAverage = 3.99872831m;
         _output.WriteLine(((int)gradePointAverage).ToString());
     }
+
 }
