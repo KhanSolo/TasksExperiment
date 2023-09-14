@@ -5,12 +5,9 @@ namespace UnitTests;
 
 public class UnitTest
 {
-    private readonly ITestOutputHelper _testOutputHelper;
+    private readonly ITestOutputHelper _output;
 
-    public UnitTest(ITestOutputHelper testOutputHelper)
-    {
-        _testOutputHelper = testOutputHelper;
-    }
+    public UnitTest(ITestOutputHelper testOutputHelper) => _output = testOutputHelper;
 
     [Fact]
     public void TestContains()
@@ -45,6 +42,22 @@ public class UnitTest
         ex.Message.Should().Be("Value cannot be null. (Parameter 'request')");
     }
 
+    [Fact]
+    public void TestHashSet()
+    {
+        var uniqArr = new[] { 1, 2, 3 };
+        foreach (var item in uniqArr.ToHashSet())
+        {
+            _output.WriteLine(item.ToString());
+        }
+        _output.WriteLine(string.Empty);
+        var repeatable = new[] { 1, 2, 2, 2, 3, 3, 4 };
+        foreach (var item in repeatable.ToHashSet())
+        {
+            _output.WriteLine(item.ToString());
+        }
+    }
+
     private void EnhancedMethod(SignableEntity request)
         =>
             DoProcessing(Validate(request), request.Payload);    
@@ -56,7 +69,7 @@ public class UnitTest
 
     private void DoProcessing(SignableEntity request, string payload)
     {
-        _testOutputHelper.WriteLine($"{request} was processed. Payload is {payload}");
+        _output.WriteLine($"{request} was processed. Payload is {payload}");
     }
 }
 
