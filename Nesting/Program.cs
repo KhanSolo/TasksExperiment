@@ -10,10 +10,11 @@ internal class Program
 
         //var boxed = FormatterServices.GetUninitializedObject(typeof(void));
         //Console.WriteLine(boxed.GetType().FullName);
-        string d = "";
 
-        d = d + @"\";
-        Console.Write(d);
+        var input = Console.ReadLine();
+        if (input is null) return;
+        Console.WriteLine(input.PadLeft(12, '-'));
+        Console.WriteLine(input.PadRight(12, '-'));
     }
 }
 

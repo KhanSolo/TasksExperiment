@@ -9,6 +9,33 @@ public class UnitTest
 
     public UnitTest(ITestOutputHelper testOutputHelper) => _output = testOutputHelper;
 
+    enum SignableEntityType
+    {
+        None,
+        Active,
+        SuperActive,
+        Passive,
+        Aggressive,
+    }
+
+    [Fact]
+    public void TestEnumHashSet()
+    {
+        var set = new HashSet<SignableEntityType>();
+
+        if (DateTime.Now.Year > 2000)
+        {
+            set.Add(SignableEntityType.None);
+            set.Add(SignableEntityType.None);
+            set.Add(SignableEntityType.Active);
+        }
+        set.Add(SignableEntityType.None);
+        set.Add(SignableEntityType.Aggressive);
+        set.Add(SignableEntityType.Aggressive);
+
+        set.Count.Should().Be(3);
+    }
+
     [Fact]
     public void TestContains()
     {
@@ -40,6 +67,33 @@ public class UnitTest
 
         var ex = Assert.Throws<ArgumentNullException>(() => EnhancedMethod(default));
         ex.Message.Should().Be("Value cannot be null. (Parameter 'request')");
+    }
+
+    [Fact]
+    public void EnumerateJaggedArray()
+    {
+        var jagged = new int[][]
+        {
+            new[] { 1, 2, },
+            new[] { 3, 4, },
+            new[] { 5, 6, 7, },
+        };
+
+        Array.ForEach(jagged, nested => Array.ForEach(nested, entry => _output.WriteLine(entry.ToString())));
+    }
+
+    [Fact]
+    public void ClearArray()
+    {
+        var jagged = new int[][]
+        {
+            new[] { 1, 2, },
+            new[] { 3, 4, },
+            new[] { 5, 6, 7, },
+        };
+
+        Array.Clear(jagged, 1, 1);
+        Array.ForEach(jagged, nested => { if (nested != null) Array.ForEach(nested, entry => _output.WriteLine(entry.ToString())); });
     }
 
     [Fact]
